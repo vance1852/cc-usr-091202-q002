@@ -1,0 +1,11 @@
+{
+  "domain": "困难群众补贴核验",
+  "policies": [
+    {"code": "LIVING-AID", "effectiveFrom": "2026-10-01", "priority": 30},
+    {"code": "TEMP-AID", "effectiveFrom": "2026-09-15", "priority": 10}
+  ],
+  "records": [
+    {"applicationId": "A-1001", "familyKey": "F-021", "district": "新河街道", "submittedAt": "2026-10-03T09:20:00+08:00"},
+    {"applicationId": "A-1002", "familyKey": "F-021", "district": "新河街道", "submittedAt": "2026-10-03T09:25:00+08:00"}
+  ]
+}
