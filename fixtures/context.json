@@ -1,0 +1,7 @@
+{
+  "domain": "困难群众补贴核验",
+  "records": [
+    {"window": "综合受理一号窗", "service": "社保转移", "date": "2026-10-08", "capacity": 18},
+    {"window": "综合受理二号窗", "service": "居住证签注", "date": "2026-10-08", "capacity": 12}
+  ]
+}
