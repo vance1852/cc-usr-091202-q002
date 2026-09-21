@@ -1,0 +1,79 @@
+{
+  "version": "2026-09",
+  "note": "冲突材料样例与处置口径。severity 驱动受理行为：reject 直接驳回、review 冻结发放转人工、warn 仅提示、supplement 列入补正清单。",
+  "rules": [
+    {
+      "code": "DUPLICATE_FAMILY_APPLICATION",
+      "severity": "reject",
+      "message": "同一政策周期内该家庭已存在有效申请",
+      "advice": "请在原受理社区继续办理，或等待本政策周期结束后重新申报"
+    },
+    {
+      "code": "PERSON_IN_MULTIPLE_FAMILIES",
+      "severity": "review",
+      "message": "同一人员同时出现在两个有效家庭申请中",
+      "advice": "核实共同生活家庭成员关系后再放行发放"
+    },
+    {
+      "code": "DOC_REUSED",
+      "severity": "warn",
+      "message": "同一份证明材料在多笔申请中重复使用",
+      "advice": "核对证明原件与开具单位，防止材料挪用"
+    },
+    {
+      "code": "CROSS_MONTH_PROOF_EXPIRED",
+      "severity": "supplement",
+      "message": "证明已跨月失效",
+      "advice": "请补交审核当月仍在有效期内的证明"
+    },
+    {
+      "code": "PRIORITY_PAYMENT_CONFLICT",
+      "severity": "review",
+      "message": "高优先级救助获批时，低优先级救助已发放",
+      "advice": "暂停自动发放，转街道人工比对是否追回"
+    },
+    {
+      "code": "LATE_PAYMENT_RECEIPT",
+      "severity": "review",
+      "message": "发放回执到达时申请已终止或被高优先级申请替代",
+      "advice": "回执已留存，禁止重复发放，转人工核对资金流向"
+    },
+    {
+      "code": "REJECTED_AFTER_PAYMENT",
+      "severity": "review",
+      "message": "驳回结论在资金发放后才到达",
+      "advice": "驳回原因完整留痕，暂停后续发放并启动追回核查"
+    }
+  ],
+  "cases": [
+    {
+      "caseId": "C-01",
+      "ruleCode": "DUPLICATE_FAMILY_APPLICATION",
+      "familyKey": "F-021",
+      "applicationIds": ["A-1001", "A-1002"],
+      "detail": "同一家庭在新河街道幸福社区、长桥社区两个社区重复申报 2026 年 10 月最低生活保障"
+    },
+    {
+      "caseId": "C-02",
+      "ruleCode": "CROSS_MONTH_PROOF_EXPIRED",
+      "applicationId": "A-1001",
+      "materialCode": "INCOME_PROOF",
+      "proofEffectiveFrom": "2026-09-01",
+      "proofEffectiveUntil": "2026-09-30",
+      "detail": "收入证明 9 月开具，审核跨入 10 月后失效，需补交 10 月有效证明"
+    },
+    {
+      "caseId": "C-03",
+      "ruleCode": "PERSON_IN_MULTIPLE_FAMILIES",
+      "applicationIds": ["A-1001", "A-2001"],
+      "detail": "同一身份证号分别作为 F-021、F-088 家庭成员申报，需核实共同生活家庭唯一性"
+    },
+    {
+      "caseId": "C-04",
+      "ruleCode": "DOC_REUSED",
+      "materialDocRef": "DOC-INCOME-7788",
+      "applicationIds": ["A-1001", "A-2002"],
+      "detail": "同一份收入证明扫描件被两笔申请引用"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "version": "2026-09",
+  "note": "政策优先级与排他关系均可配置：priority 数值大者优先；exclusivityGroups 描述同一家庭同一救助周期内不得重复享受的政策组合。",
+  "workflow": [
+    {"code": "COMMUNITY_INTAKE", "name": "社区受理", "role": "coordinator"},
+    {"code": "STREET_REVIEW", "name": "街道审核", "role": "staff"},
+    {"code": "DISTRICT_APPROVAL", "name": "区级确认", "role": "approver"},
+    {"code": "DISBURSEMENT", "name": "资金发放", "role": "finance"}
+  ],
+  "programs": {
+    "LIVING-AID": {
+      "code": "LIVING-AID",
+      "name": "最低生活保障",
+      "effectiveFrom": "2026-10-01",
+      "priority": 30,
+      "cycle": "MONTHLY",
+      "amount": 1200,
+      "requiredMaterials": ["ID_CARD", "HOUSEHOLD_REGISTER", "INCOME_PROOF", "PROPERTY_PROOF"],
+      "criteria": [
+        {"code": "INCOME_BELOW_LINE", "name": "共同生活家庭成员人均月收入低于低保线", "field": "incomePerMember", "op": "<=", "value": 1500}
+      ]
+    },
+    "DISABILITY-AID": {
+      "code": "DISABILITY-AID",
+      "name": "残疾人两项补贴",
+      "effectiveFrom": "2026-01-01",
+      "priority": 20,
+      "cycle": "MONTHLY",
+      "amount": 200,
+      "requiredMaterials": ["ID_CARD", "HOUSEHOLD_REGISTER", "DISABILITY_CERT"],
+      "criteria": [
+        {"code": "HAS_DISABLED_MEMBER", "name": "家庭成员持有残疾人证", "field": "hasDisabledMember", "op": "==", "value": true}
+      ]
+    },
+    "TEMP-AID": {
+      "code": "TEMP-AID",
+      "name": "临时救助",
+      "effectiveFrom": "2026-09-15",
+      "priority": 10,
+      "cycle": "EVENT",
+      "amount": 3000,
+      "requiredMaterials": ["ID_CARD", "INCOME_PROOF", "HARDSHIP_PROOF"],
+      "criteria": [
+        {"code": "INCOME_BELOW_EMERGENCY_LINE", "name": "家庭成员人均月收入低于临时救助线", "field": "incomePerMember", "op": "<=", "value": 4500}
+      ]
+    }
+  },
+  "exclusivityGroups": [
+    {
+      "id": "BASIC-LIVING-CHOICE",
+      "programs": ["LIVING-AID", "TEMP-AID"],
+      "reason": "同一政策周期内，最低生活保障与临时救助按优先级择一享受；调整本列表即可改变三档救助的优先关系。"
+    }
+  ]
+}

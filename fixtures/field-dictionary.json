@@ -1,0 +1,38 @@
+{
+  "version": "2026-09",
+  "fields": {
+    "person.name": {
+      "label": "姓名",
+      "sensitive": false,
+      "mask": {"coordinator": "name", "staff": "name", "approver": "name", "finance": "name", "auditor": "name", "applicant": "full", "*": "hidden"}
+    },
+    "person.idCard": {
+      "label": "身份证号",
+      "sensitive": true,
+      "mask": {"coordinator": "idCard", "staff": "idCard", "approver": "idCard", "finance": "idCard", "auditor": "idCardStrict", "applicant": "full", "*": "hidden"}
+    },
+    "person.mobile": {
+      "label": "手机号码",
+      "sensitive": true,
+      "mask": {"coordinator": "phone", "staff": "phone", "approver": "phone", "finance": "hidden", "auditor": "phone", "applicant": "full", "*": "hidden"}
+    },
+    "person.bankAccount": {
+      "label": "银行账号",
+      "sensitive": true,
+      "mask": {"coordinator": "hidden", "staff": "hidden", "approver": "hidden", "finance": "bankCard", "auditor": "hidden", "applicant": "full", "*": "hidden"}
+    },
+    "person.address": {
+      "label": "居住地址",
+      "sensitive": true,
+      "mask": {"coordinator": "address", "staff": "address", "approver": "address", "finance": "hidden", "auditor": "address", "applicant": "full", "*": "hidden"}
+    }
+  },
+  "materials": {
+    "ID_CARD": {"label": "居民身份证", "validity": "LONG_TERM"},
+    "HOUSEHOLD_REGISTER": {"label": "居民户口簿", "validity": "LONG_TERM"},
+    "DISABILITY_CERT": {"label": "残疾人证", "validity": "LONG_TERM"},
+    "HARDSHIP_PROOF": {"label": "急难生活困难证明", "validity": "LONG_TERM"},
+    "INCOME_PROOF": {"label": "家庭收入证明", "validity": "ISSUE_MONTH", "amountField": "amount", "unit": "元/月"},
+    "PROPERTY_PROOF": {"label": "家庭财产状况证明", "validity": "ISSUE_MONTH"}
+  }
+}
