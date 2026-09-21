@@ -1,0 +1,24 @@
+{
+  "version": "2026-09",
+  "roles": ["caseworker", "disburser", "auditor", "district-admin", "verification-agent"],
+  "applicantFields": {
+    "name":          { "label": "申请人姓名", "type": "string", "required": true,  "sensitivity": "medium", "mask": { "default": "full", "auditor": "partial" }, "keepHead": 1, "keepTail": 0 },
+    "idCardNo":      { "label": "身份证号",   "type": "string", "required": true,  "pattern": "^[0-9]{17}[0-9Xx]$", "sensitivity": "high",
+                       "mask": { "caseworker": "full", "district-admin": "partial", "auditor": "partial", "disburser": "partial", "default": "hidden" }, "keepHead": 6, "keepTail": 4 },
+    "phone":         { "label": "联系电话",   "type": "string", "required": false, "pattern": "^1[0-9]{10}$", "sensitivity": "medium",
+                       "mask": { "caseworker": "full", "default": "partial" }, "keepHead": 3, "keepTail": 2 },
+    "residenceType": { "label": "户籍类型",   "type": "enum",   "required": true,  "enum": ["LOCAL", "RESIDENCE_PERMIT", "OTHER"], "sensitivity": "low", "mask": { "default": "full" } },
+    "address":       { "label": "住址",       "type": "string", "required": true,  "sensitivity": "medium",
+                       "mask": { "caseworker": "full", "default": "partial" }, "keepHead": 6, "keepTail": 0 },
+    "monthlyIncome": { "label": "月收入(元)", "type": "number", "required": false, "sensitivity": "medium",
+                       "mask": { "caseworker": "full", "auditor": "full", "district-admin": "full", "default": "hidden" } }
+  },
+  "memberFields": {
+    "name":          { "label": "成员姓名", "type": "string", "required": true,  "sensitivity": "medium", "mask": { "default": "full", "auditor": "partial" }, "keepHead": 1, "keepTail": 0 },
+    "idCardNo":      { "label": "身份证号", "type": "string", "required": false, "pattern": "^[0-9]{17}[0-9Xx]$", "sensitivity": "high",
+                       "mask": { "caseworker": "full", "district-admin": "partial", "auditor": "partial", "default": "hidden" }, "keepHead": 6, "keepTail": 4 },
+    "relation":      { "label": "与申请人关系", "type": "string", "required": true, "sensitivity": "low", "mask": { "default": "full" } },
+    "monthlyIncome": { "label": "月收入(元)", "type": "number", "required": false, "sensitivity": "medium",
+                       "mask": { "caseworker": "full", "auditor": "full", "district-admin": "full", "default": "hidden" } }
+  }
+}

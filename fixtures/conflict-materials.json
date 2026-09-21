@@ -1,0 +1,23 @@
+{
+  "rules": [
+    {
+      "code": "INCOME-AMOUNT-CONFLICT",
+      "desc": "存在金额不一致的有效收入证明",
+      "check": "SAME_FIELD_DIFFERENT_VALUE",
+      "docType": "INCOME_PROOF",
+      "field": "monthlyAmount"
+    },
+    {
+      "code": "PROPERTY-DECLARATION-CONFLICT",
+      "desc": "房产证明与无房声明不得同时有效",
+      "check": "MUTUALLY_EXCLUSIVE",
+      "docTypes": ["PROPERTY_CERT", "NO_PROPERTY_DECLARATION"]
+    },
+    {
+      "code": "EMPLOYMENT-STATUS-CONFLICT",
+      "desc": "在职证明与失业登记不得同时有效",
+      "check": "MUTUALLY_EXCLUSIVE",
+      "docTypes": ["EMPLOYMENT_CERT", "UNEMPLOYMENT_REGISTER"]
+    }
+  ]
+}

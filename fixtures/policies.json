@@ -1,0 +1,70 @@
+{
+  "settings": {
+    "priorityStrategy": "EXCLUSIVE_BY_PRIORITY",
+    "tieBreak": "FIRST_COME",
+    "note": "低保、残疾补贴、临时救助的优先关系由 priority 数值配置，数值大者优先；priorityStrategy 改为 ALLOW_PARALLEL 时允许同周期并行享受"
+  },
+  "policies": [
+    {
+      "code": "LIVING-AID",
+      "name": "最低生活保障",
+      "shortName": "低保",
+      "priority": 30,
+      "effectiveFrom": "2026-10-01",
+      "effectiveTo": "2026-12-31",
+      "period": { "label": "2026Q4", "start": "2026-10-01", "end": "2026-12-31" },
+      "amount": { "value": 950, "unit": "CNY/月" },
+      "requiredDocuments": [
+        { "docType": "ID_CARD", "label": "申请人身份证明" },
+        { "docType": "HOUSEHOLD_REGISTER", "label": "户口簿" },
+        { "docType": "INCOME_PROOF", "label": "家庭收入证明", "validityDays": 30 }
+      ],
+      "verifications": [
+        { "checkType": "INCOME", "label": "人社收入核验" },
+        { "checkType": "PROPERTY", "label": "不动产登记核验" }
+      ],
+      "eligibility": [
+        { "code": "INCOME_CAP", "desc": "家庭人均月收入不超过低保标准1000元", "rule": { "type": "PER_CAPITA_INCOME_MAX", "value": 1000 } },
+        { "code": "LOCAL_RESIDENCE", "desc": "申请人具有本街道户籍或有效居住证", "rule": { "type": "FIELD_EQUALS", "field": "applicant.residenceType", "value": "LOCAL" } }
+      ]
+    },
+    {
+      "code": "DISABILITY-AID",
+      "name": "困难残疾人生活补贴",
+      "shortName": "残疾补贴",
+      "priority": 20,
+      "effectiveFrom": "2026-09-01",
+      "effectiveTo": "2026-12-31",
+      "period": { "label": "2026H2", "start": "2026-07-01", "end": "2026-12-31" },
+      "amount": { "value": 300, "unit": "CNY/月" },
+      "requiredDocuments": [
+        { "docType": "ID_CARD", "label": "申请人身份证明" },
+        { "docType": "DISABILITY_CERT", "label": "残疾人证", "validityDays": 365 }
+      ],
+      "verifications": [
+        { "checkType": "DISABILITY", "label": "残联残疾等级核验" }
+      ],
+      "eligibility": [
+        { "code": "HAS_DISABILITY_CERT", "desc": "持有有效残疾人证", "rule": { "type": "HAS_VALID_MATERIAL", "docType": "DISABILITY_CERT" } }
+      ]
+    },
+    {
+      "code": "TEMP-AID",
+      "name": "临时救助",
+      "shortName": "临时救助",
+      "priority": 10,
+      "effectiveFrom": "2026-09-15",
+      "effectiveTo": "2026-12-31",
+      "period": { "label": "2026H2", "start": "2026-07-01", "end": "2026-12-31" },
+      "amount": { "value": 2000, "unit": "CNY/次" },
+      "requiredDocuments": [
+        { "docType": "ID_CARD", "label": "申请人身份证明" },
+        { "docType": "EMERGENCY_PROOF", "label": "突发困难情况证明", "validityDays": 60 }
+      ],
+      "verifications": [
+        { "checkType": "EMERGENCY", "label": "应急管理部门情况核验" }
+      ],
+      "eligibility": []
+    }
+  ]
+}
